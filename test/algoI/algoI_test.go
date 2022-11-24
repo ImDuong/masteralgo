@@ -57,6 +57,10 @@ type (
 		arg1, arg2 string
 		expected   bool
 	}
+
+	treeTest struct {
+		arg1, arg2, expected []interface{}
+	}
 )
 
 var testcase704 = []arrayTest{
@@ -383,6 +387,29 @@ func Test695(t *testing.T) {
 		output := algoI.MaxAreaOfIsland(test.arg1)
 		if !reflect.DeepEqual(output, test.expected) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase617 = []treeTest{
+	{[]interface{}{1}, []interface{}{1, 2}, []interface{}{2, 2}},
+	{[]interface{}{1, nil, 1, nil, 1}, []interface{}{1, 2}, []interface{}{2, 2, 1, nil, 1}},
+	{[]interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{2, nil, 2, nil, 2, nil, 2, nil, 2, nil, 2, 2, 1, nil, nil, nil, 1, nil, 1, nil, 1, nil, 1, 2}},
+	{[]interface{}{}, []interface{}{}, []interface{}{}},
+	{[]interface{}{1, 2, nil, 3}, []interface{}{1, nil, 2, nil, 3}, []interface{}{2, 2, 2, 3, nil, nil, 3}},
+	{[]interface{}{1, 3, 2, 5}, []interface{}{2, 1, 3, nil, 4, nil, 7}, []interface{}{3, 4, 5, 5, 4, nil, 7}},
+}
+
+func Test617(t *testing.T) {
+	for idx, test := range testcase617 {
+		root1 := helpers.GetBinaryTreeFromList(test.arg1)
+		root2 := helpers.GetBinaryTreeFromList(test.arg2)
+		output := algoI.MergeTrees(root1, root2)
+		outputParsed := helpers.GetListFromBinaryTree(output)
+		if len(test.expected) != 0 || len(outputParsed) != 0 {
+			if !reflect.DeepEqual(outputParsed, test.expected) {
+				t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, outputParsed)
+			}
 		}
 	}
 }

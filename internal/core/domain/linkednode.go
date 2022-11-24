@@ -11,4 +11,9 @@ type (
 		Left  *TreeNode
 		Right *TreeNode
 	}
+
+	TreeNodeWrapper struct {
+		ParentNode *TreeNode
+		Node       *TreeNode
+	}
 )
