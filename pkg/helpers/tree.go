@@ -22,10 +22,8 @@ func GetListFromBinaryTree(root *domain.TreeNode) []interface{} {
 			fullList = append(fullList, nil)
 		} else {
 			fullList = append(fullList, poppedNode.Val)
-			if !(poppedNode.Left == nil && poppedNode.Right == nil) {
-				queue = append(queue, poppedNode.Left)
-				queue = append(queue, poppedNode.Right)
-			}
+			queue = append(queue, poppedNode.Left)
+			queue = append(queue, poppedNode.Right)
 		}
 
 	}

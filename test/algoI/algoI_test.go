@@ -393,7 +393,7 @@ func Test695(t *testing.T) {
 
 var testcase617 = []treeTest{
 	{[]interface{}{1}, []interface{}{1, 2}, []interface{}{2, 2}},
-	{[]interface{}{1, nil, 1, nil, 1}, []interface{}{1, 2}, []interface{}{2, 2, 1, nil, 1}},
+	{[]interface{}{1, nil, 1, nil, 1}, []interface{}{1, 2}, []interface{}{2, 2, 1, nil, nil, nil, 1}},
 	{[]interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{2, nil, 2, nil, 2, nil, 2, nil, 2, nil, 2, 2, 1, nil, nil, nil, 1, nil, 1, nil, 1, nil, 1, 2}},
 	{[]interface{}{}, []interface{}{}, []interface{}{}},
 	{[]interface{}{1, 2, nil, 3}, []interface{}{1, nil, 2, nil, 3}, []interface{}{2, 2, 2, 3, nil, nil, 3}},
