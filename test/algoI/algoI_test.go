@@ -2,6 +2,7 @@ package algoI_test
 
 import (
 	"masteralgo/algoI"
+	"masteralgo/internal/core/domain"
 	"masteralgo/pkg/helpers"
 	"reflect"
 	"testing"
@@ -392,20 +393,39 @@ func Test695(t *testing.T) {
 }
 
 var testcase617 = []treeTest{
+	{[]interface{}{}, []interface{}{}, []interface{}{}},
 	{[]interface{}{1}, []interface{}{1, 2}, []interface{}{2, 2}},
 	{[]interface{}{1, nil, 1, nil, 1}, []interface{}{1, 2}, []interface{}{2, 2, 1, nil, nil, nil, 1}},
 	{[]interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{1, nil, 1, nil, 1, nil, 1, nil, 1, nil, 1, 2}, []interface{}{2, nil, 2, nil, 2, nil, 2, nil, 2, nil, 2, 2, 1, nil, nil, nil, 1, nil, 1, nil, 1, nil, 1, 2}},
-	{[]interface{}{}, []interface{}{}, []interface{}{}},
 	{[]interface{}{1, 2, nil, 3}, []interface{}{1, nil, 2, nil, 3}, []interface{}{2, 2, 2, 3, nil, nil, 3}},
 	{[]interface{}{1, 3, 2, 5}, []interface{}{2, 1, 3, nil, 4, nil, 7}, []interface{}{3, 4, 5, 5, 4, nil, 7}},
 }
 
 func Test617(t *testing.T) {
+	var err error
 	for idx, test := range testcase617 {
-		root1 := helpers.GetBinaryTreeFromList(test.arg1)
-		root2 := helpers.GetBinaryTreeFromList(test.arg2)
-		output := algoI.MergeTrees(root1, root2)
-		outputParsed := helpers.GetListFromBinaryTree(output)
+		var input1 *domain.TreeNode
+		if len(test.arg1) > 0 {
+			var root1 domain.ITreeNode
+			root1, err = input1.GetTreeFromList(test.arg1)
+			if err != nil {
+				t.Errorf("TEST ID: %d. Error when parsing first arg: %v", idx, err)
+				continue
+			}
+			input1 = root1.(*domain.TreeNode)
+		}
+		var input2 *domain.TreeNode
+		if len(test.arg2) > 0 {
+			var root2 domain.ITreeNode
+			root2, err = input2.GetTreeFromList(test.arg2)
+			if err != nil {
+				t.Errorf("TEST ID: %d. Error when parsing second arg: %v", idx, err)
+				continue
+			}
+			input2 = root2.(*domain.TreeNode)
+		}
+		output := algoI.MergeTrees(input1, input2)
+		outputParsed := output.GetListFromTree()
 		if len(test.expected) != 0 || len(outputParsed) != 0 {
 			if !reflect.DeepEqual(outputParsed, test.expected) {
 				t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, outputParsed)

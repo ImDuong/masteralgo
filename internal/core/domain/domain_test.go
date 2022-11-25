@@ -1,21 +1,20 @@
-package helpers_test
+package domain_test
 
 import (
 	"masteralgo/internal/core/domain"
-	"masteralgo/pkg/helpers"
 	"reflect"
 	"testing"
 )
 
 type (
 	treeTest struct {
-		arg1     *domain.TreeNode
+		arg1     domain.ITreeNode
 		expected []interface{}
 	}
 
 	treeTestV2 struct {
 		arg1     []interface{}
-		expected *domain.TreeNode
+		expected domain.ITreeNode
 	}
 )
 
@@ -207,7 +206,7 @@ var testcaseGetListFromBinaryTree = []treeTest{
 
 func TestGetListFromBinaryTree(t *testing.T) {
 	for idx, test := range testcaseGetListFromBinaryTree {
-		output := helpers.GetListFromBinaryTree(test.arg1)
+		output := test.arg1.GetListFromTree()
 		if !reflect.DeepEqual(output, test.expected) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
 		}
@@ -372,9 +371,14 @@ var testcaseGetBinaryTreeFromList = []treeTestV2{
 
 func TestGetBinaryTreeFromList(t *testing.T) {
 	for idx, test := range testcaseGetBinaryTreeFromList {
-		output := helpers.GetBinaryTreeFromList(test.arg1)
-		outputParsed := helpers.GetListFromBinaryTree(output)
-		expectedParsed := helpers.GetListFromBinaryTree(test.expected)
+		var input *domain.TreeNode
+		output, err := input.GetTreeFromList(test.arg1)
+		if err != nil {
+			t.Errorf("TEST ID: %d. Error when parsing input: %v", idx, err)
+			continue
+		}
+		outputParsed := output.GetListFromTree()
+		expectedParsed := test.expected.GetListFromTree()
 		if !reflect.DeepEqual(outputParsed, expectedParsed) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, expectedParsed, outputParsed)
 		}

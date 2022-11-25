@@ -6,14 +6,8 @@ type (
 		Next *ListNode
 	}
 
-	TreeNode struct {
-		Val   int
-		Left  *TreeNode
-		Right *TreeNode
-	}
-
-	TreeNodeWrapper struct {
-		ParentNode *TreeNode
-		Node       *TreeNode
+	ITreeNode interface {
+		GetListFromTree() []interface{}
+		GetTreeFromList([]interface{}) (ITreeNode, error)
 	}
 )
