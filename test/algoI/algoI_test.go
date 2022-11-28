@@ -41,6 +41,10 @@ type (
 		expected [][]int
 	}
 
+	arrayTestV7 struct {
+		arg1, arg2, expected []int
+	}
+
 	byteArrayTest struct {
 		arg1     []byte
 		expected []byte
@@ -450,6 +454,23 @@ var testcase542 = []arrayTestV6{
 	},
 	{
 		[][]int{
+			{0, 0, 0}, {0, 1, 0}, {1, 1, 1},
+		},
+		[][]int{
+			{0, 0, 0}, {0, 1, 0}, {1, 2, 1},
+		},
+	},
+	{
+		[][]int{
+			{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
+		},
+		[][]int{
+			{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
+		},
+	},
+
+	{
+		[][]int{
 			{1, 0, 0}, {1, 1, 1}, {1, 1, 1},
 		},
 		[][]int{
@@ -472,22 +493,6 @@ var testcase542 = []arrayTestV6{
 			{0, 1, 0, 1, 2}, {1, 1, 0, 0, 1}, {0, 0, 0, 1, 0}, {1, 0, 1, 1, 1}, {1, 0, 0, 0, 1},
 		},
 	},
-	{
-		[][]int{
-			{0, 0, 0}, {0, 1, 0}, {1, 1, 1},
-		},
-		[][]int{
-			{0, 0, 0}, {0, 1, 0}, {1, 2, 1},
-		},
-	},
-	{
-		[][]int{
-			{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
-		},
-		[][]int{
-			{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
-		},
-	},
 }
 
 func Test542(t *testing.T) {
@@ -495,6 +500,51 @@ func Test542(t *testing.T) {
 		output := algoI.UpdateMatrix(test.arg1)
 		if !reflect.DeepEqual(output, test.expected) {
 			t.Errorf("TEST ID: %d. Expected \n%v \nbut got \n%v", idx, test.expected, output)
+		}
+	}
+}
+
+func Test542V2(t *testing.T) {
+	for idx, test := range testcase542 {
+		output := algoI.UpdateMatrixV2(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected \n%v \nbut got \n%v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase21 = []arrayTestV7{
+	{[]int{1, 2, 4}, []int{1, 3, 4}, []int{1, 1, 2, 3, 4, 4}},
+	{[]int{}, []int{}, []int{}},
+	{[]int{}, []int{0}, []int{0}},
+}
+
+func Test21(t *testing.T) {
+	for idx, test := range testcase21 {
+		head1 := helpers.GetLinkedListfromIntArray(test.arg1)
+		head2 := helpers.GetLinkedListfromIntArray(test.arg2)
+		output := algoI.MergeTwoLists(head1, head2)
+		parsedOutput := helpers.GetIntArrayfromLinkedList(output)
+		if !reflect.DeepEqual(parsedOutput, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, parsedOutput)
+		}
+	}
+}
+
+var testcase206 = []arrayTestV2{
+	{[]int{1, 2, 3, 4, 5}, []int{5, 4, 3, 2, 1}},
+	{[]int{1, 2}, []int{2, 1}},
+	{[]int{0}, []int{0}},
+	{[]int{}, []int{}},
+}
+
+func Test206(t *testing.T) {
+	for idx, test := range testcase206 {
+		head := helpers.GetLinkedListfromIntArray(test.arg1)
+		output := algoI.ReverseList(head)
+		outputParsed := helpers.GetIntArrayfromLinkedList(output)
+		if !reflect.DeepEqual(outputParsed, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, outputParsed)
 		}
 	}
 }

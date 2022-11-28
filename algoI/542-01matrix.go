@@ -70,3 +70,47 @@ func getAdjCells(curCell domain.Cell, nbRows, nbCols int) []domain.Cell {
 	}
 	return cells
 }
+
+// DP solution from hiepit: // loop twice with 2 types of updating
+func UpdateMatrixV2(mat [][]int) [][]int {
+	maxValue := 10000
+	nbRows := len(mat)
+	nbCols := len(mat[0])
+	for i := range mat {
+		for j := range mat[0] {
+			if mat[i][j] != 0 {
+				var top, left int = maxValue, maxValue
+				if !(i-1 < 0) {
+					top = mat[i-1][j] + 1
+				}
+				if !(j-1 < 0) {
+					left = mat[i][j-1] + 1
+				}
+				if top > left {
+					top = left
+				}
+				mat[i][j] = top
+			}
+		}
+	}
+	for i := nbRows - 1; i >= 0; i-- {
+		for j := nbCols - 1; j >= 0; j-- {
+			if mat[i][j] != 0 {
+				var bot, right int = maxValue, maxValue
+				if !(i+1 >= nbRows) {
+					bot = mat[i+1][j] + 1
+				}
+				if !(j+1 >= nbCols) {
+					right = mat[i][j+1] + 1
+				}
+				if bot > right {
+					bot = right
+				}
+				if bot != maxValue && mat[i][j] > bot {
+					mat[i][j] = bot
+				}
+			}
+		}
+	}
+	return mat
+}
