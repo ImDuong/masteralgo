@@ -548,3 +548,51 @@ func Test206(t *testing.T) {
 		}
 	}
 }
+
+var testcase944 = []arrayTestV5{
+	{[][]int{
+		{2, 1, 1}, {1, 1, 0}, {0, 1, 1},
+	},
+		4,
+	},
+	{[][]int{
+		{2, 1, 1}, {0, 1, 1}, {1, 0, 1},
+	},
+		-1,
+	},
+	{[][]int{
+		{0, 2},
+	},
+		0,
+	},
+	// no fresh oranges -> 0 minutes
+	{[][]int{
+		{0},
+	},
+		0,
+	},
+	{[][]int{
+		{0, 1},
+	},
+		-1,
+	},
+	{[][]int{
+		{1},
+	},
+		-1,
+	},
+	{[][]int{
+		{2},
+	},
+		0,
+	},
+}
+
+func Test944(t *testing.T) {
+	for idx, test := range testcase944 {
+		output := algoI.OrangesRotting(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
