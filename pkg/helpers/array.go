@@ -6,6 +6,30 @@ import (
 	"reflect"
 )
 
+func IsEqualWithoutOrder(inp1, inp2 interface{}) bool {
+	if reflect.TypeOf(inp1).Kind() != reflect.Slice || reflect.TypeOf(inp2).Kind() != reflect.Slice {
+		return false
+	}
+	input1 := reflect.ValueOf(inp1)
+	input2 := reflect.ValueOf(inp2)
+	if input1.Len() != input2.Len() {
+		return false
+	}
+	for i := 0; i < input1.Len(); i++ {
+		found := false
+		for j := 0; j < input2.Len(); j++ {
+			if reflect.DeepEqual(input1.Index(i).Interface(), input2.Index(j).Interface()) {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
+}
+
 func Reverse(s interface{}) {
 	n := reflect.ValueOf(s).Len()
 	swap := reflect.Swapper(s)

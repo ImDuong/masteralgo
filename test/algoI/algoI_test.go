@@ -45,6 +45,16 @@ type (
 		arg1, arg2, expected []int
 	}
 
+	arrayTestV8 struct {
+		arg1     []int
+		expected [][]int
+	}
+
+	arrayTestV9 struct {
+		arg1, arg2 int
+		expected   [][]int
+	}
+
 	byteArrayTest struct {
 		arg1     []byte
 		expected []byte
@@ -66,6 +76,11 @@ type (
 	stringTestV3 struct {
 		arg1, arg2 string
 		expected   bool
+	}
+
+	stringTestV4 struct {
+		arg1     string
+		expected []string
 	}
 
 	treeTest struct {
@@ -592,6 +607,68 @@ func Test944(t *testing.T) {
 	for idx, test := range testcase944 {
 		output := algoI.OrangesRotting(test.arg1)
 		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase46 = []arrayTestV8{
+	{
+		[]int{1, 2, 3},
+		[][]int{
+			{1, 2, 3}, {1, 3, 2}, {2, 1, 3}, {2, 3, 1}, {3, 1, 2}, {3, 2, 1},
+		},
+	},
+	{
+		[]int{1},
+		[][]int{
+			{1},
+		},
+	},
+	{
+		[]int{0, 1},
+		[][]int{
+			{0, 1}, {1, 0},
+		},
+	},
+}
+
+func Test46(t *testing.T) {
+	for idx, test := range testcase46 {
+		output := algoI.Permute(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase784 = []stringTestV4{
+	{"a1b2", []string{"a1b2", "a1B2", "A1b2", "A1B2"}},
+	{"3z4", []string{"3z4", "3Z4"}},
+}
+
+func Test784(t *testing.T) {
+	for idx, test := range testcase784 {
+		output := algoI.LetterCasePermutation(test.arg1)
+		if !helpers.IsEqualWithoutOrder(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase77 = []arrayTestV9{
+	{4, 2, [][]int{
+		{1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4},
+	}},
+	{1, 1, [][]int{
+		{1},
+	}},
+}
+
+func Test77(t *testing.T) {
+	for idx, test := range testcase77 {
+		output := algoI.Combine(test.arg1, test.arg2)
+		if !helpers.IsEqualWithoutOrder(output, test.expected) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
 		}
 	}
