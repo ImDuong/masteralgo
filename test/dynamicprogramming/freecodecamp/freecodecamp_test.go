@@ -35,3 +35,11 @@ func TestLandingRunwayIterative(t *testing.T) {
 		}
 	}
 }
+
+func TestLandingRunwayRecusiveWithMemo(t *testing.T) {
+	for idx, test := range testcaseLandingRunway {
+		if output := dp_freecodecamp.CanStopRecursiveWithMemo(test.arg1, test.arg2, test.arg3); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}

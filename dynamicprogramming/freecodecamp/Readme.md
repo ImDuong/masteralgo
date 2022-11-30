@@ -88,6 +88,19 @@
 
 
 6. Add memoization
+- Store function result into memory for later looking up
+
+    -> add a cache to DP solution
+
+- Implementation for `Recursive` with `Memoization` in Golang
+
+    ![](imgs/landingrunway-recursive-memo-1.png)
+
+    ![](imgs/landingrunway-recursive-memo-2.png)
+
+    ![](imgs/landingrunway-recursive-memo-3.png)
+
+
 
 # Reference
 - FreeCodeCamp: https://www.freecodecamp.org/news/follow-these-steps-to-solve-any-dynamic-programming-interview-problem-cc98e508cd0e/

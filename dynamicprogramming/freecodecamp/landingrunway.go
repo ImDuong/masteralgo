@@ -80,3 +80,44 @@ func CanStopIterative(runway []bool, initSpeed, startIdx int) bool {
 	}
 	return false
 }
+
+func CanStopRecursiveWithMemo(runway []bool, initSpeed, startIdx int) bool {
+	mapPositionToValidSpeeds := make(map[int]map[int]bool)
+
+	// create a private function to maintain original function signature
+	return canStopRecursiveWithMemo(runway, initSpeed, startIdx, mapPositionToValidSpeeds)
+}
+
+func canStopRecursiveWithMemo(runway []bool, initSpeed, startIdx int, mapPositionToValidSpeeds map[int]map[int]bool) bool {
+	// init the map when needed
+	if _, ok := mapPositionToValidSpeeds[startIdx]; !ok {
+		mapPositionToValidSpeeds[startIdx] = make(map[int]bool)
+	}
+
+	// base case for speed == 0
+	if initSpeed == 0 {
+		mapPositionToValidSpeeds[startIdx][initSpeed] = true
+		return true
+	}
+
+	// other base cases
+	if startIdx < 0 || startIdx >= len(runway) || !runway[startIdx] {
+		mapPositionToValidSpeeds[startIdx][initSpeed] = false
+		return false
+	}
+
+	// note: omit case check initSpeed < 0 due to
+	// 1. initSpeed can only be adjusted by 1 unit -> always meet 0 first
+	// 2. the original input is always guaranteed non negative
+
+	// try all options of S
+	speedOptions := []int{initSpeed, initSpeed + 1, initSpeed - 1}
+	for i := range speedOptions {
+		if CanStopRecursive(runway, speedOptions[i], startIdx+speedOptions[i]) {
+			mapPositionToValidSpeeds[startIdx][initSpeed] = true
+			return true
+		}
+	}
+	mapPositionToValidSpeeds[startIdx][initSpeed] = false
+	return false
+}
