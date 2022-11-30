@@ -92,6 +92,10 @@ func canStopRecursiveWithMemo(runway []bool, initSpeed, startIdx int, mapPositio
 	// init the map when needed
 	if _, ok := mapPositionToValidSpeeds[startIdx]; !ok {
 		mapPositionToValidSpeeds[startIdx] = make(map[int]bool)
+	} else {
+		if _, ok := mapPositionToValidSpeeds[startIdx][initSpeed]; ok {
+			return mapPositionToValidSpeeds[startIdx][initSpeed]
+		}
 	}
 
 	// base case for speed == 0
