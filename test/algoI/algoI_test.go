@@ -91,6 +91,10 @@ type (
 		arg1     uint32
 		expected int
 	}
+
+	intTestV2 struct {
+		arg1, expected int
+	}
 )
 
 var testcase704 = []arrayTest{
@@ -722,6 +726,19 @@ func Test136(t *testing.T) {
 func Test136V2(t *testing.T) {
 	for idx, test := range testcase136 {
 		if output := algoI.SingleNumberV2(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase70 = []intTestV2{
+	{2, 2},
+	{3, 3},
+}
+
+func Test70(t *testing.T) {
+	for idx, test := range testcase70 {
+		if output := algoI.ClimbStairs(test.arg1); output != test.expected {
 			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
