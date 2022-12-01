@@ -743,3 +743,39 @@ func Test70(t *testing.T) {
 		}
 	}
 }
+
+var testcase120 = []arrayTestV5{
+	{[][]int{
+		{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3},
+	},
+		11,
+	},
+	{[][]int{
+		{-10},
+	},
+		-10,
+	},
+}
+
+func Test120(t *testing.T) {
+	for idx, test := range testcase120 {
+		output := algoI.MinimumTotal(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+// we don't use arg2, so just leave it as 0 in all test cases
+var testcase198 = []arrayTest{
+	{[]int{1, 2, 3, 1}, 0, 4},
+	{[]int{2, 7, 9, 3, 1}, 0, 12},
+}
+
+func Test198(t *testing.T) {
+	for idx, test := range testcase198 {
+		if output := algoI.Rob(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
