@@ -1,3 +1,6 @@
+In this folder, an example in [FreeCodeCamp](https://www.freecodecamp.org/news/follow-these-steps-to-solve-any-dynamic-programming-interview-problem-cc98e508cd0e/) tutorial has been re-implemented in Golang
+All ideas, concepts & examples are belonged to `Nikola Otasevic`.
+
 # GUIDELINES: 7 steps to solve DP problems
 1. How to recognize a DP problem
 2. Identify problem variables

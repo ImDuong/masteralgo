@@ -86,6 +86,11 @@ type (
 	treeTest struct {
 		arg1, arg2, expected []interface{}
 	}
+
+	intTest struct {
+		arg1     uint32
+		expected int
+	}
 )
 
 var testcase704 = []arrayTest{
@@ -670,6 +675,54 @@ func Test77(t *testing.T) {
 		output := algoI.Combine(test.arg1, test.arg2)
 		if !helpers.IsEqualWithoutOrder(output, test.expected) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase191 = []intTest{
+	{00000000000000000000000000001011, 3},
+	{00000000000000000000000010000000, 1},
+	// {1111111111111111111111111111101, 31},
+	{00000000000000000000000010000000, 1},
+}
+
+func Test191(t *testing.T) {
+	for idx, test := range testcase191 {
+		output := algoI.HammingWeight(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+func Test191V2(t *testing.T) {
+	for idx, test := range testcase191 {
+		output := algoI.HammingWeightV2(test.arg1)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, output)
+		}
+	}
+}
+
+// we don't use arg2, so just leave it as 0 in all test cases
+var testcase136 = []arrayTest{
+	{[]int{2, 2, 1}, 0, 1},
+	{[]int{4, 1, 2, 1, 2}, 0, 4},
+	{[]int{1}, 0, 1},
+}
+
+func Test136(t *testing.T) {
+	for idx, test := range testcase136 {
+		if output := algoI.SingleNumber(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+func Test136V2(t *testing.T) {
+	for idx, test := range testcase136 {
+		if output := algoI.SingleNumberV2(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
 }
