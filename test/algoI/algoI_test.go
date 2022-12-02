@@ -770,11 +770,28 @@ func Test120(t *testing.T) {
 var testcase198 = []arrayTest{
 	{[]int{1, 2, 3, 1}, 0, 4},
 	{[]int{2, 7, 9, 3, 1}, 0, 12},
+	{[]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 0, 0},
 }
 
 func Test198(t *testing.T) {
 	for idx, test := range testcase198 {
 		if output := algoI.Rob(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+func Test198V2(t *testing.T) {
+	for idx, test := range testcase198 {
+		if output := algoI.RobV2(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+func Test198V3(t *testing.T) {
+	for idx, test := range testcase198 {
+		if output := algoI.RobV3(test.arg1); output != test.expected {
 			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
