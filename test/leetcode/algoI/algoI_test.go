@@ -1,8 +1,8 @@
 package algoI_test
 
 import (
-	"masteralgo/algoI"
 	"masteralgo/internal/core/domain"
+	"masteralgo/leetcode/algoI"
 	"masteralgo/pkg/helpers"
 	"reflect"
 	"testing"
