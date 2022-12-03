@@ -2,6 +2,7 @@ package domain_test
 
 import (
 	"masteralgo/internal/core/domain"
+	"masteralgo/pkg/helpers"
 	"reflect"
 	"testing"
 )
@@ -15,6 +16,16 @@ type (
 	treeTestV2 struct {
 		arg1     []interface{}
 		expected domain.ITreeNode
+	}
+
+	probTest struct {
+		arg1           []interface{}
+		arg2, expected []float32
+	}
+
+	probTestV2 struct {
+		arg1     []interface{}
+		expected domain.ProbDensityFunc
 	}
 )
 
@@ -381,6 +392,80 @@ func TestGetBinaryTreeFromList(t *testing.T) {
 		expectedParsed := test.expected.GetListFromTree()
 		if !reflect.DeepEqual(outputParsed, expectedParsed) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, expectedParsed, outputParsed)
+		}
+	}
+}
+
+var testcaseNewPDFFromValues = []probTestV2{
+	{[]interface{}{1, 2, 2, 2}, domain.ProbDensityFunc{
+		Vars: []domain.DiscreteRandVar{
+			{
+				Prob:   0.25,
+				Choice: 1,
+			},
+			{
+				Prob:   0.75,
+				Choice: 2,
+			},
+		},
+	}},
+}
+
+func TestNewPDFFromValues(t *testing.T) {
+	for idx, test := range testcaseNewPDFFromValues {
+		output, err := domain.NewPDFFromValues(test.arg1)
+		if err != nil {
+			t.Errorf("TEST ID: %d. Error when parsing input: %v", idx, err)
+			continue
+		}
+		if !helpers.IsEqualWithoutOrder(output.Vars, test.expected.Vars) {
+			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected.Vars, output.Vars)
+		}
+	}
+}
+
+// note that arg2 and expected must be equal
+var testcaseProbRand = []probTest{
+	{
+		arg1:     []interface{}{0, 1, 2},
+		arg2:     []float32{0.2, 0.5, 0.3},
+		expected: []float32{0.2, 0.5, 0.3},
+	},
+}
+
+func TestProbRand(t *testing.T) {
+	// the bigger nbSampling is, the more certain the result is
+	nbSampling := 10000000
+	for idx, test := range testcaseProbRand {
+		pdf, err := domain.NewPDF(test.arg1, test.arg2)
+		if err != nil {
+			t.Errorf("TEST ID: %d. Error when parsing input: %v", idx, err)
+			continue
+		}
+
+		samples := make([]float32, len(test.arg1))
+		for i := 0; i < nbSampling; i++ {
+			var rIdx int
+			rIdx, err = pdf.Rand()
+			if err != nil {
+				t.Errorf("TEST ID: %d. Error when getting random: %v", idx, err)
+				break
+			}
+			samples[rIdx]++
+		}
+		if err != nil {
+			continue
+		}
+		// normalize sample values
+		for i := range samples {
+			samples[i] /= float32(nbSampling)
+		}
+
+		for i := range samples {
+			if !helpers.IsRoughlyEqual(float64(samples[i]), float64(test.expected[i]), 0.001) {
+				t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.expected, samples)
+				break
+			}
 		}
 	}
 }
