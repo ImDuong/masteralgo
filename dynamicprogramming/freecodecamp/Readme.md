@@ -1,4 +1,5 @@
 In this folder, an example in [FreeCodeCamp](https://www.freecodecamp.org/news/follow-these-steps-to-solve-any-dynamic-programming-interview-problem-cc98e508cd0e/) tutorial has been re-implemented in Golang
+
 All ideas, concepts & examples are belonged to `Nikola Otasevic`.
 
 # GUIDELINES: 7 steps to solve DP problems
@@ -103,7 +104,44 @@ All ideas, concepts & examples are belonged to `Nikola Otasevic`.
 
     ![](imgs/landingrunway-recursive-memo-3.png)
 
+7. Determine time complexity
+- The time complexity depends on the number of states in the problem
+- Given that 
+    ```
+    P: the set of all positions (|P| is the number of elements in P)
+    S: the set of all speeds
+    ```
+    The number of states in this problem is: $\left| P\right| \times \left| S\right|$
+    where work done per state is $O(1)$ 
+- Because $\left| S\right|$ is limited by $\left| P\right|$ or the length of runway $L$, the time complexity will be $O(\left| P\right|^2)$ or $O(L^2)$
+- However, $\left| S\right|$ is much smaller than $\left| P\right|$. Therefore, we will try to find a tighter bound on $\left| S\right|$
 
+    ![](imgs/maxspeedscenario.png)
+
+    - In the fastest scenario, for a runway of length L, the following inequality has to hold: 
+    $$ (S - 1) + (S - 2) + ... + 1 < L $$
+    $$ => S \times (S - 1) / 2 < L $$
+    $$ => S^2 - S - 2L < 0 $$
+    
+    - The roots of above equations are: 
+        $$ r_{1} = \frac{1}{2} + \sqrt{\frac{1}{4} + 2L} $$
+
+        and
+
+        $$ r_{2} = \frac{1}{2} - \sqrt{\frac{1}{4} + 2L} $$
+
+    - This means our inequality becomes: 
+        $$(S - r_{1}) \times (S - r_{2}) < 0$$
+
+    - Consider the assumption that $S - r_{2} > 0$ holds for any $S > 0, L > 0$, the inequality $S < r_{1}$ could be referred immediately. This leads to the following
+        $$S < \frac{1}{2} + \sqrt{\frac{1}{4} + 2L}$$
+        or approximately
+        $$S < \sqrt{2L}$$
+        or 
+        $$S < \sqrt{L}$$
+        when L is too big
+
+- Overall, the time complexity will become $O(L \times \sqrt{L})$
 
 # Reference
 - FreeCodeCamp: https://www.freecodecamp.org/news/follow-these-steps-to-solve-any-dynamic-programming-interview-problem-cc98e508cd0e/
