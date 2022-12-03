@@ -11,7 +11,7 @@ All ideas, concepts & examples are belonged to `Nikola Otasevic`.
 6. Add memoization
 7. Determine time complexity
 
-# EXAMPLE
+# EXAMPLE: The Spikey Runway
 ## Statement
 1. There is a flat of runway with a bunch of spikes ~ a boolean array (`False` for a spike)
 
@@ -119,15 +119,13 @@ All ideas, concepts & examples are belonged to `Nikola Otasevic`.
     ![](imgs/maxspeedscenario.png)
 
     - In the fastest scenario, for a runway of length L, the following inequality has to hold: 
-    $$ (S - 1) + (S - 2) + ... + 1 < L $$
-    $$ => S \times (S - 1) / 2 < L $$
-    $$ => S^2 - S - 2L < 0 $$
+        $$ (S - 1) + (S - 2) + ... + 1 < L $$
+        $$ => S \times (S - 1) / 2 < L $$
+        $$ => S^2 - S - 2L < 0 $$
     
     - The roots of above equations are: 
         $$ r_{1} = \frac{1}{2} + \sqrt{\frac{1}{4} + 2L} $$
-
         and
-
         $$ r_{2} = \frac{1}{2} - \sqrt{\frac{1}{4} + 2L} $$
 
     - This means our inequality becomes: 
