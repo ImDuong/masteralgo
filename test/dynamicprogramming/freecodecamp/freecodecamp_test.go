@@ -5,14 +5,6 @@ import (
 	"testing"
 )
 
-type (
-	arrayTest struct {
-		arg1       []bool
-		arg2, arg3 int
-		expected   bool
-	}
-)
-
 var testcaseLandingRunway = []arrayTest{
 	{[]bool{true, false, true, true, true, true, false}, 2, 0, true},
 	{[]bool{true, false, true, true, false}, 2, 0, true},

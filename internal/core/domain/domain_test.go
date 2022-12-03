@@ -1,6 +1,7 @@
 package domain_test
 
 import (
+	"fmt"
 	"masteralgo/internal/core/domain"
 	"masteralgo/pkg/helpers"
 	"reflect"
@@ -431,6 +432,11 @@ var testcaseProbRand = []probTest{
 		arg2:     []float32{0.2, 0.5, 0.3},
 		expected: []float32{0.2, 0.5, 0.3},
 	},
+	{
+		arg1:     []interface{}{true, false},
+		arg2:     []float32{0.1, 0.9},
+		expected: []float32{0.1, 0.9},
+	},
 }
 
 func TestProbRand(t *testing.T) {
@@ -467,5 +473,6 @@ func TestProbRand(t *testing.T) {
 				break
 			}
 		}
+		fmt.Println(samples)
 	}
 }

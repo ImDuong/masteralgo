@@ -104,6 +104,58 @@ All ideas, concepts & examples are belonged to `Nikola Otasevic`.
 
     ![](imgs/landingrunway-recursive-memo-3.png)
 
+- The stress test was also brung up to examine the effectiveness of each solution
+    - Following are 4 setups, which were validated by the benchmark in Golang
+
+        ```
+        [Setup 1]
+        Runway Length: 1000
+        Start Speed: 30
+        Start Index: 0
+        Probability of a spike for a spot: 0.1
+        ```
+
+        ```
+        [Setup 2]
+        Runway Length: 1000
+        Start Speed: 30
+        Start Index: 0
+        Probability of a spike for a spot: 0.2
+        ```
+
+        ```
+        [Setup 3]
+        Runway Length: 1000
+        Start Speed: 30
+        Start Index: 0
+        Probability of a spike for a spot: 0.3
+        ```
+
+        ```
+        [Setup 4]
+        Runway Length: 1000
+        Start Speed: 30
+        Start Index: 0
+        Probability of a spike for a spot: 0.4
+        ```
+
+    - The result for each setup is:
+
+        - Setup 1
+        ![](imgs/benchmark_1.png)
+
+        - Setup 2
+        ![](imgs/benchmark_2.png)
+
+        - Setup 3
+        ![](imgs/benchmark_3.png)
+
+        - Setup 4
+        ![](imgs/benchmark_4.png)
+
+    - For most of the setups , iterative solution tends to bring up the best speed. However, its resource allocation is so dramatic compared to recursive solutions
+
+
 7. Determine time complexity
 - The time complexity depends on the number of states in the problem
 - Given that 
