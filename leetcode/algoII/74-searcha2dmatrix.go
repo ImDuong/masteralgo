@@ -2,7 +2,7 @@ package algoII
 
 // https://leetcode.com/problems/search-a-2d-matrix
 
-func SearchMatrix(matrix [][]int, target int) bool {
+func Search2DMatrix(matrix [][]int, target int) bool {
 	// binary search for row, and then for column
 
 	// step 1. binary search for row (aka all elements in the first column)
