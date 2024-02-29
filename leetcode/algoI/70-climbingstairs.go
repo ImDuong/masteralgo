@@ -1,17 +1,16 @@
 package algoI
 
 // recursive solution with memoization
+// 1 <= n <= 45
 func ClimbStairs(n int) int {
-	mapPositionToNbWays := make(map[int]int)
+	mapPositionToNbWays := make([]int, 46)
 	return canReachTop(n, 0, mapPositionToNbWays)
 }
 
-func canReachTop(n, curIdx int, mapPositionToNbWays map[int]int) int {
+func canReachTop(n, curIdx int, mapPositionToNbWays []int) int {
 	// init the map when needed
-	if _, ok := mapPositionToNbWays[curIdx]; ok {
+	if mapPositionToNbWays[curIdx] != 0 {
 		return mapPositionToNbWays[curIdx]
-	} else {
-		mapPositionToNbWays[curIdx] = 0
 	}
 
 	if curIdx == n {
