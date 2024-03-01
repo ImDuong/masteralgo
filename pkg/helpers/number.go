@@ -16,3 +16,10 @@ func IsRoughlyEqual(a, b, epsilon float64) bool {
 		return diff/math.Min(absA+absB, math.MaxFloat64) < epsilon
 	}
 }
+
+func MinInt(a, b int) int {
+	if a <= b {
+		return a
+	}
+	return b
+}
