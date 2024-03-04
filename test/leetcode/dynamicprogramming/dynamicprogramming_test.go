@@ -43,3 +43,16 @@ func Test746(t *testing.T) {
 		}
 	}
 }
+
+var testcase740 = []arrayTest{
+	{[]int{3, 4, 2}, 6},
+	{[]int{2, 2, 3, 3, 3, 4}, 9},
+}
+
+func Test740(t *testing.T) {
+	for idx, test := range testcase740 {
+		if output := dynamicprogramming.DeleteAndEarn(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
