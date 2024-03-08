@@ -11,8 +11,18 @@ type (
 		expected int
 	}
 
+	intTestV1 struct {
+		arg1, arg2 int
+		expected   int
+	}
+
 	arrayTest struct {
 		arg1     []int
+		expected int
+	}
+
+	array2dTest struct {
+		arg1     [][]int
 		expected int
 	}
 )
@@ -52,6 +62,34 @@ var testcase740 = []arrayTest{
 func Test740(t *testing.T) {
 	for idx, test := range testcase740 {
 		if output := dynamicprogramming.DeleteAndEarn(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase62 = []intTestV1{
+	{3, 7, 28},
+	{3, 2, 3},
+}
+
+func Test62(t *testing.T) {
+	for idx, test := range testcase62 {
+		if output := dynamicprogramming.UniquePathsV2(test.arg1, test.arg2); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase63 = []array2dTest{
+	{[][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}, 2},
+	{[][]int{{0, 1}, {0, 0}}, 1},
+	{[][]int{{0, 0}, {0, 1}}, 0},
+	{[][]int{{0}}, 1},
+}
+
+func Test63(t *testing.T) {
+	for idx, test := range testcase63 {
+		if output := dynamicprogramming.UniquePathsWithObstacles(test.arg1); output != test.expected {
 			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
