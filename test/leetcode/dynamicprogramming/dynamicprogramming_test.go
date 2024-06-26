@@ -94,3 +94,16 @@ func Test63(t *testing.T) {
 		}
 	}
 }
+
+var testcase64 = []array2dTest{
+	{[][]int{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}, 7},
+	{[][]int{{1, 2, 3}, {4, 5, 6}}, 12},
+}
+
+func Test64(t *testing.T) {
+	for idx, test := range testcase64 {
+		if output := dynamicprogramming.MinPathSum(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
