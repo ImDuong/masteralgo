@@ -107,3 +107,31 @@ func Test64(t *testing.T) {
 		}
 	}
 }
+
+var testcase120 = []array2dTest{
+	{[][]int{{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}}, 11},
+	{[][]int{{-10}}, -10},
+	{[][]int{{-1}, {2, 3}, {1, -1, -3}}, -1},
+}
+
+func Test120(t *testing.T) {
+	for idx, test := range testcase120 {
+		if output := dynamicprogramming.MinimumTotal(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase931 = []array2dTest{
+	{[][]int{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}}, 13},
+	{[][]int{{-19, 57}, {-40, -5}}, -59},
+	{[][]int{{-48}}, -48},
+}
+
+func Test931(t *testing.T) {
+	for idx, test := range testcase931 {
+		if output := dynamicprogramming.MinFallingPathSum(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
