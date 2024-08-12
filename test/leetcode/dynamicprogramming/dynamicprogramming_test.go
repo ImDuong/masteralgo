@@ -25,6 +25,11 @@ type (
 		arg1     [][]int
 		expected int
 	}
+
+	array2dByteTest struct {
+		arg1     [][]byte
+		expected int
+	}
 )
 
 var testcase1137 = []intTest{
@@ -131,6 +136,23 @@ var testcase931 = []array2dTest{
 func Test931(t *testing.T) {
 	for idx, test := range testcase931 {
 		if output := dynamicprogramming.MinFallingPathSum(test.arg1); output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase221 = []array2dByteTest{
+	{[][]byte{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}, 4},
+	{[][]byte{{'0', '1'}, {'1', '0'}}, 1},
+	{[][]byte{{'0'}}, 0},
+	{[][]byte{{'0', '1', '0'}}, 1},
+	{[][]byte{{'0'}, {'1'}}, 1},
+	{[][]byte{{'1', '0', '1', '1', '0', '1'}, {'1', '1', '1', '1', '1', '1'}, {'0', '1', '1', '0', '1', '1'}, {'1', '1', '1', '0', '1', '0'}, {'0', '1', '1', '1', '1', '1'}, {'1', '1', '0', '1', '1', '1'}}, 4},
+}
+
+func Test221(t *testing.T) {
+	for idx, test := range testcase221 {
+		if output := dynamicprogramming.MaximalSquare(test.arg1); output != test.expected {
 			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
