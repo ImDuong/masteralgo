@@ -2,6 +2,8 @@ package dynamicprogramming_test
 
 import (
 	"masteralgo/leetcode/dynamicprogramming"
+	"slices"
+	"strings"
 	"testing"
 )
 
@@ -29,6 +31,11 @@ type (
 	array2dByteTest struct {
 		arg1     [][]byte
 		expected int
+	}
+
+	stringTest struct {
+		arg1     string
+		expected []string
 	}
 )
 
@@ -154,6 +161,20 @@ func Test221(t *testing.T) {
 	for idx, test := range testcase221 {
 		if output := dynamicprogramming.MaximalSquare(test.arg1); output != test.expected {
 			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase5 = []stringTest{
+	{"babad", []string{"bab", "aba"}},
+	{"cbbd", []string{"bb"}},
+	{"bb", []string{"bb"}},
+}
+
+func Test5(t *testing.T) {
+	for idx, test := range testcase5 {
+		if output := dynamicprogramming.LongestPalindrome(test.arg1); !slices.Contains(test.expected, output) {
+			t.Errorf("TEST ID: %d. Expected %s but got %s", idx, strings.Join(test.expected, ","), output)
 		}
 	}
 }
