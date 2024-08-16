@@ -169,11 +169,20 @@ var testcase5 = []stringTest{
 	{"babad", []string{"bab", "aba"}},
 	{"cbbd", []string{"bb"}},
 	{"bb", []string{"bb"}},
+	{"kiomaramol", []string{"omaramo"}},
 }
 
 func Test5(t *testing.T) {
 	for idx, test := range testcase5 {
 		if output := dynamicprogramming.LongestPalindrome(test.arg1); !slices.Contains(test.expected, output) {
+			t.Errorf("TEST ID: %d. Expected %s but got %s", idx, strings.Join(test.expected, ","), output)
+		}
+	}
+}
+
+func Test5Manachers(t *testing.T) {
+	for idx, test := range testcase5 {
+		if output := dynamicprogramming.LongestPalindromeWithManachers(test.arg1); !slices.Contains(test.expected, output) {
 			t.Errorf("TEST ID: %d. Expected %s but got %s", idx, strings.Join(test.expected, ","), output)
 		}
 	}
