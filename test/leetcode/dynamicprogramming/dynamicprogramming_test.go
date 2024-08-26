@@ -37,6 +37,12 @@ type (
 		arg1     string
 		expected []string
 	}
+
+	stringTestV2 struct {
+		arg1     string
+		arg2     []string
+		expected bool
+	}
 )
 
 var testcase1137 = []intTest{
@@ -184,6 +190,21 @@ func Test5Manachers(t *testing.T) {
 	for idx, test := range testcase5 {
 		if output := dynamicprogramming.LongestPalindromeWithManachers(test.arg1); !slices.Contains(test.expected, output) {
 			t.Errorf("TEST ID: %d. Expected %s but got %s", idx, strings.Join(test.expected, ","), output)
+		}
+	}
+}
+
+var testcase139 = []stringTestV2{
+	{"aaaaaaa", []string{"aaaa", "aa"}, false},
+	{"leetcode", []string{"leet", "code"}, true},
+	{"applepenapple", []string{"apple", "pen"}, true},
+	{"catsandog", []string{"cats", "dog", "and", "cat"}, false},
+}
+
+func Test139(t *testing.T) {
+	for idx, test := range testcase139 {
+		if output := dynamicprogramming.WordBreak(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %t but got %t", idx, test.expected, output)
 		}
 	}
 }
