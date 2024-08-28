@@ -43,6 +43,17 @@ type (
 		arg2     []string
 		expected bool
 	}
+
+	stringTestV3 struct {
+		arg1     string
+		expected int
+	}
+
+	stringTestV4 struct {
+		arg1     string
+		arg2     string
+		expected int
+	}
 )
 
 var testcase1137 = []intTest{
@@ -205,6 +216,45 @@ func Test139(t *testing.T) {
 	for idx, test := range testcase139 {
 		if output := dynamicprogramming.WordBreak(test.arg1, test.arg2); test.expected != output {
 			t.Errorf("TEST ID: %d. Expected %t but got %t", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase516 = []stringTestV3{
+	{"bbbab", 4},
+	{"cbbd", 2},
+}
+
+func Test516(t *testing.T) {
+	for idx, test := range testcase516 {
+		if output := dynamicprogramming.LongestPalindromeSubseq(test.arg1); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
+
+var testcase1143 = []stringTestV4{
+	{"abcde", "ace", 3},
+	{"abc", "abc", 3},
+	{"abc", "def", 0},
+}
+
+func Test1143(t *testing.T) {
+	for idx, test := range testcase1143 {
+		if output := dynamicprogramming.LongestCommonSubsequenceMemoi(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+
+	for idx, test := range testcase1143 {
+		if output := dynamicprogramming.LongestCommonSubsequence(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+
+	for idx, test := range testcase1143 {
+		if output := dynamicprogramming.LongestCommonSubsequenceOptimizedSpace(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
 		}
 	}
 }
