@@ -258,3 +258,24 @@ func Test1143(t *testing.T) {
 		}
 	}
 }
+
+var tetcase72 = []stringTestV4{
+	{"a", "b", 1},
+	{"horse", "ros", 3},
+	{"intention", "execution", 5},
+	{"", "", 0},
+}
+
+func Test72(t *testing.T) {
+	for idx, test := range tetcase72 {
+		if output := dynamicprogramming.MinDistance(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+
+	for idx, test := range tetcase72 {
+		if output := dynamicprogramming.MinDistanceSpaceOptimized(test.arg1, test.arg2); test.expected != output {
+			t.Errorf("TEST ID: %d. Expected %d but got %d", idx, test.expected, output)
+		}
+	}
+}
