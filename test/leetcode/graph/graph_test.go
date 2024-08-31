@@ -46,3 +46,27 @@ func Test2699(t *testing.T) {
 		}
 	}
 }
+
+type test1514 struct {
+	nbNodes   int
+	edges     [][]int
+	succProb  []float64
+	startNode int
+	endNode   int
+	expected  float64
+}
+
+var testcase1514 = []test1514{
+	{3, [][]int{{0, 1}, {1, 2}, {0, 2}}, []float64{0.5, 0.5, 0.2}, 0, 2, 0.25},
+	{3, [][]int{{0, 1}, {1, 2}, {0, 2}}, []float64{0.5, 0.5, 0.3}, 0, 2, 0.3},
+	{3, [][]int{{0, 1}}, []float64{0.5}, 0, 2, 0},
+}
+
+func Test1514(t *testing.T) {
+	for idx, test := range testcase1514 {
+		output := graph.MaxProbability(test.nbNodes, test.edges, test.succProb, test.startNode, test.endNode)
+		if output != test.expected {
+			t.Errorf("TEST ID: %d. Expected %f but got %f", idx, test.expected, output)
+		}
+	}
+}
