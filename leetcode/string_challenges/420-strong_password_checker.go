@@ -79,6 +79,7 @@ func strongPasswordChecker(password string) int {
 			isJustCleaned = false
 			for i := 0; i < nbConsecutiveGrs; i++ {
 				if consecutiveGrs[i] >= 3 && consecutiveGrs[i]%3 == j {
+					// don't need to rush removing all, just remove one by one until the length is enough
 					nbRemovingSteps := min(j+1, curPwdLen-20)
 					consecutiveGrs[i] -= nbRemovingSteps
 					nbSteps += nbRemovingSteps
