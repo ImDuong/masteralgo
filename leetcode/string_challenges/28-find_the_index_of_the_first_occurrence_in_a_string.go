@@ -1,5 +1,7 @@
 package string_challenges
 
+import "masteralgo/pkg/helpers"
+
 func Challenge28(haystack string, needle string) int {
 	return strStr(haystack, needle)
 }
@@ -10,7 +12,7 @@ func strStr(inp string, pat string) int {
 		return -1
 	}
 
-	lps := getLPS(pat)
+	lps := helpers.GetLPS(pat)
 	j := 0
 	for i := 0; i < inpLen; i++ {
 		if inp[i] == pat[j] {
@@ -27,30 +29,4 @@ func strStr(inp string, pat string) int {
 	}
 
 	return -1
-}
-
-func getLPS(pat string) []int {
-	if len(pat) == 0 {
-		return []int{}
-	}
-	patLen := len(pat)
-	lps := make([]int, patLen)
-
-	// always start at 0, because there is no proper prefix
-	// for string having length = 1
-	lps[0] = 0
-
-	maxMatch := 0
-	for i := 1; i < patLen; i++ {
-		if pat[i] == pat[maxMatch] {
-			maxMatch++
-			lps[i] = maxMatch
-			continue
-		} else if maxMatch > 0 {
-			maxMatch = lps[maxMatch-1]
-			i--
-		}
-	}
-
-	return lps
 }

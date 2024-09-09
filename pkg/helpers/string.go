@@ -7,7 +7,7 @@ func KMPSearch(pat string, inp string) []int {
 		return []int{}
 	}
 
-	lps := getLPS(pat)
+	lps := GetLPS(pat)
 	var rs []int
 	j := 0
 	for i := 0; i < inpLen; i++ {
@@ -30,7 +30,7 @@ func KMPSearch(pat string, inp string) []int {
 
 // lps[i]: the longest proper prefix that also be a suffix, obtained from pat[0:i + 1]
 // example: "aabcdaabc" -> "aabc" is both proper prefix and a suffix -> lps for "aabcdaabc" is 4
-func getLPS(pat string) []int {
+func GetLPS(pat string) []int {
 	if len(pat) == 0 {
 		return []int{}
 	}

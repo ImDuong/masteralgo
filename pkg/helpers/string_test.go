@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestComputeLPS(t *testing.T) {
+func TestGetLPS(t *testing.T) {
 	type testData struct {
 		pat string
 		lps []int
@@ -23,7 +23,7 @@ func TestComputeLPS(t *testing.T) {
 	}
 
 	for idx, test := range tcs {
-		output := getLPS(test.pat)
+		output := GetLPS(test.pat)
 		if !reflect.DeepEqual(output, test.lps) {
 			t.Errorf("TEST ID: %d. Expected %v but got %v", idx, test.lps, output)
 		}
