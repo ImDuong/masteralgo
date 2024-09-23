@@ -4,7 +4,7 @@ func Challenge2707(s string, dictionary []string) int {
 	return minExtraChar(s, dictionary)
 }
 
-// call f[i + 1] is the minimum number of extra characters left over if you break up s[0: i+1] optimally
+// call f[i + 1] as the minimum number of extra characters left over if you break up s[0: i+1] optimally
 // e.g., abcd -> s[0:4]
 // f[0] = 0 because no extra characters
 //
@@ -20,7 +20,8 @@ func Challenge2707(s string, dictionary []string) int {
 // -> f[i + 1] = min(f[i] + 1, f[i + 1 - len(wj)])
 //
 // Final questions!
-// Why the minExtraChar of s with length n lies on f[n] but not f[n - 1]?
+// Why the minExtraChar of s (having length as n) lies on f[n] but not f[n - 1]?
+// This question can be rephrased as "Why not f[i], but f[i + 1] is for s[i]?"
 // To answer this, let's use Reductio ad absurdum
 // Assumption: if we set up f[i] is for s[i], this means when we are at s[0]
 //   - if len(wj) = 1 -> need to find f[0 - 1]
