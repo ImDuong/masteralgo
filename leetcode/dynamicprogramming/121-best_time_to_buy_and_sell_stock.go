@@ -18,12 +18,13 @@ func maxProfit(prices []int) int {
 
 // A trick to replace the wrapper code in leetcode with customized init function
 // This trick helps the code runs 0ms time
-// I still don't get it in detail but will investigate in the future
+// In fact, this code does not use our implementation of maxProfit, but instead calculating maxProfit immediately
+//
 // func init() {
 // 	in := bufio.NewScanner(os.Stdin)
 // 	in.Buffer(nil, math.MaxInt32)
-//     f, _ := os.Create("user.out")
-//     out := bufio.NewWriter(f)
+// 	f, _ := os.Create("user.out")
+// 	out := bufio.NewWriter(f)
 // 	for in.Scan() {
 // 		s := in.Bytes()
 // 		maxProfit, min := 0, math.MaxInt32
@@ -40,6 +41,6 @@ func maxProfit(prices []int) int {
 // 		}
 // 		fmt.Fprintln(out, maxProfit)
 // 	}
-//     out.Flush()
+// 	out.Flush()
 // 	os.Exit(0)
 // }
