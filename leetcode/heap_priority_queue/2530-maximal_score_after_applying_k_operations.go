@@ -9,7 +9,7 @@ func Challenge2530(nums []int, k int) int64 {
 }
 
 func maxKelements(nums []int, k int) int64 {
-	h2 := IntHeap(nums)
+	h2 := IntMaxHeap(nums)
 	h := &h2
 	heap.Init(h)
 	var rs int64 = 0
@@ -23,23 +23,23 @@ func maxKelements(nums []int, k int) int64 {
 	return rs
 }
 
-type IntHeap []int
+type IntMaxHeap []int
 
-func (h IntHeap) Len() int           { return len(h) }
-func (h IntHeap) Less(i, j int) bool { return h[i] > h[j] }
-func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h IntMaxHeap) Len() int           { return len(h) }
+func (h IntMaxHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h IntMaxHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
-func (h *IntHeap) Push(x interface{}) {
+func (h *IntMaxHeap) Push(x interface{}) {
 	*h = append(*h, x.(int))
 }
 
-func (h *IntHeap) Pop() interface{} {
+func (h *IntMaxHeap) Pop() interface{} {
 	poppedItem := (*h)[h.Len()-1]
 	*h = (*h)[0 : h.Len()-1]
 	return poppedItem
 }
 
-func (h *IntHeap) update(idx int, value int) {
+func (h *IntMaxHeap) update(idx int, value int) {
 	(*h)[idx] = value
 	heap.Fix(h, idx)
 }
