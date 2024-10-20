@@ -28,3 +28,26 @@ func minGroups(intervals [][]int) int {
 	}
 	return rs
 }
+
+// still minesweep but without sorted keys map
+// suitable when the whole intervals is small. In this challenge, the constraints is 1 <= lefti <= righti <= 10^6
+func minGroupsWithCountingSort(intervals [][]int) int {
+	rangeStart, rangeEnd := 1000007, 1
+	for i := range intervals {
+		rangeStart = min(rangeStart, intervals[i][0])
+		rangeEnd = max(rangeEnd, intervals[i][1]+1)
+	}
+	// instead of sorted keys map, just an array
+	m := make([]int, rangeEnd+1)
+	for i := range intervals {
+		m[intervals[i][0]]++
+		m[intervals[i][1]+1]--
+	}
+	rs := 1
+	currentNbRooms := 0
+	for i := rangeStart; i <= rangeEnd; i++ {
+		currentNbRooms += m[i]
+		rs = max(rs, currentNbRooms)
+	}
+	return rs
+}
