@@ -2,7 +2,8 @@ package boilerplates
 
 // Template to solve most 'substring' problems
 // Ref: https://leetcode.com/problems/minimum-window-substring/solutions/26808/Here-is-a-10-line-template-that-can-solve-most-'substring'-problems
-
+// usually, if the problem is finding minimum -> we need to find the valid solution first, and then find the optimal one
+// otherwise, when the problem is finding maximum -> we need to mark the invalidity of the substring -> then try to find the valid substring
 func findSubString(s string) int {
 	d := make([]int, 128)
 
@@ -29,6 +30,7 @@ func findSubString(s string) int {
 				// modify counter to make the window valid/invalid
 			}
 
+			d[s[left]]--
 			// increase left to shrunk the window
 			left++
 		}
