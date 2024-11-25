@@ -1,6 +1,6 @@
 package boilerplates
 
-// Template to solve most 'substring' problems
+// Template to solve most 'substring' problems related to finding minimum or maximum substring
 // Ref: https://leetcode.com/problems/minimum-window-substring/solutions/26808/Here-is-a-10-line-template-that-can-solve-most-'substring'-problems
 // usually, if the problem is finding minimum -> we need to find the valid solution first, and then find the optimal one
 // otherwise, when the problem is finding maximum -> we need to mark the invalidity of the substring -> then try to find the valid substring
