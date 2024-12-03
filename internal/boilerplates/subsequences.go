@@ -5,7 +5,7 @@ import "masteralgo/internal/core/utils"
 func lengthOfLIS(nums []int) int {
 	lengths := make([]int, len(nums))
 	lis := []int{nums[0]}
-	for i := range nums {
+	for i := 1; i < len(nums); i++ {
 		lb := utils.LowerBound(lis, nums[i])
 		if lb >= len(lis) {
 			lis = append(lis, nums[i])
