@@ -1,4 +1,4 @@
-package dynamicprogramming
+package binarysearch
 
 import "masteralgo/internal/core/utils"
 
