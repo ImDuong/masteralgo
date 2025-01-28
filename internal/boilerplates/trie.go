@@ -5,16 +5,12 @@ type Trie struct {
 	isEnd    bool
 }
 
-func Constructor() Trie {
-	return Trie{}
-}
-
 func (this *Trie) Insert(word string) {
 	node := this
 	for _, char := range word {
 		index := char - 'a'
 		if node.children[index] == nil {
-			newNode := Constructor()
+			newNode := Trie{}
 			node.children[index] = &newNode
 		}
 		node = node.children[index]
