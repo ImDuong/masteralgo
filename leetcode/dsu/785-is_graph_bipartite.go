@@ -2,6 +2,7 @@ package dsu
 
 import "masteralgo/internal/boilerplates"
 
+// Beside using DSU, this challenge can be solved with coloring method
 func Challenge785(graph [][]int) bool {
 	return isBipartite(graph)
 }
