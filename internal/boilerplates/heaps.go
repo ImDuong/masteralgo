@@ -24,6 +24,7 @@ func (h *StringMinHeap) Top() string {
 
 // h := &IntMinHeap{}
 // heap.Init(h)
+// heap.Push(h, 123)
 type IntMinHeap []int
 
 func (h IntMinHeap) Len() int           { return len(h) }
