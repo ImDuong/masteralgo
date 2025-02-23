@@ -13,7 +13,7 @@ import "masteralgo/internal/core/domain"
 // 2. Look at the postorder, the left subtree is [4, 5, 2] and the right subtree is [6, 7, 3]
 // The result of this method is always a full binary tree
 // Time complexity: O(n^2) in the worst case, O(n) in the best case
-func constructFromPrePost(preorder []int, postorder []int) *domain.TreeNode {
+func ConstructFromPrePost(preorder []int, postorder []int) *domain.TreeNode {
 	// pointer to track cur pos in preorder
 	preIdx := 0
 
@@ -59,7 +59,7 @@ func makeTree(preorder, postorder []int, preIdx *int, postLeft, postRight int) *
 // while using postorder to find the bottom node to stop dfs -> then move up
 // Note: in recursive solution, to move up, just return the node
 // Time Complexity: because we only iterate through the preorder once, the time complexity is O(n)
-func constructFromPrePostMethod2(preorder []int, postorder []int) *domain.TreeNode {
+func ConstructFromPrePostMethod2(preorder []int, postorder []int) *domain.TreeNode {
 	preIdx, postIdx := 0, 0
 	return makeTreeRecursively(preorder, postorder, &preIdx, &postIdx)
 }
@@ -86,7 +86,7 @@ func makeTreeRecursively(preorder, postorder []int, preIdx *int, postIdx *int) *
 }
 
 // Method 3: The same with method 2 but use stack to build the tree
-func constructFromPrePostMethod3(preorder []int, postorder []int) *domain.TreeNode {
+func ConstructFromPrePostMethod3(preorder []int, postorder []int) *domain.TreeNode {
 	stk := []*domain.TreeNode{{Val: preorder[0]}}
 
 	// i, j tracks cur pos for preorder & postorder
@@ -111,7 +111,7 @@ func constructFromPrePostMethod3(preorder []int, postorder []int) *domain.TreeNo
 }
 
 // Method 4: To optimize solution 1, we can use a hashmap to store the index of each element in the postorder traversal
-func constructFromPrePostMethod4(preorder []int, postorder []int) *domain.TreeNode {
+func ConstructFromPrePostMethod4(preorder []int, postorder []int) *domain.TreeNode {
 	preIdx := 0
 	postDict := make(map[int]int)
 	for i := range postorder {
