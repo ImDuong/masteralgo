@@ -1,12 +1,5 @@
 package dfs
 
-// binary tree node
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func Challenge1302(root *TreeNode) int {
 	return deepestLeavesSum(root)
 }
