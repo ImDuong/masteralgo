@@ -82,3 +82,12 @@ func UpperBoundNegation(nums []int, target int) int {
 	}
 	return high
 }
+
+// Usually BinarySearch calculates mid as (low + high) / 2
+// but what about when we need to get the ceiling of mid?
+// To get ceil, we use the formula: (dividend + divisor - 1) / divisor
+// -> in this case, ceil = (low + high + 2 - 1) / 2 = (low + high + 1) / 2
+// And, to avoid overflow, we use the formula: low + (high - low + 1) / 2
+func GetCeilMid(low, high int) int {
+	return low + (high-low+1)/2
+}
