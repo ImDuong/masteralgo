@@ -54,3 +54,40 @@ func (dsu *DSU) Union(u, v int) bool {
 	}
 	return true
 }
+
+// track the number of edges in each component
+type DSUWithEdges struct {
+	DSU
+	Edges []int
+}
+
+func NewDSUWithEdges(nbNodes int) *DSUWithEdges {
+	dsu := DSUWithEdges{
+		DSU:   *NewDSU(nbNodes),
+		Edges: make([]int, nbNodes),
+	}
+	return &dsu
+}
+
+func (dsu *DSUWithEdges) Union(u, v int) bool {
+	u = dsu.Find(u)
+	v = dsu.Find(v)
+
+	// count 1 for this new edge between u and v
+	dsu.Edges[u]++
+
+	if u == v {
+		return false
+	}
+
+	if dsu.Rank[u] > dsu.Rank[v] {
+		dsu.Parent[v] = u
+		dsu.Edges[u] += dsu.Edges[v]
+		dsu.Rank[u] += dsu.Rank[v]
+	} else {
+		dsu.Parent[u] = v
+		dsu.Edges[v] += dsu.Edges[u]
+		dsu.Rank[v] += dsu.Rank[u]
+	}
+	return true
+}
